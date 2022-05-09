@@ -1,24 +1,12 @@
-#include <iostream>
-#include "../include/sqlite3_database.h"
-
+#include "../include/authentication.h"
 
 int main() {
-    // Example
-
-    sqlite3_database db("test.db");
-
-    db.insert("CREATE TABLE IF NOT EXISTS people (id integer, name text)");
-    db.insert("INSERT INTO people (id, name) VALUES (0, 'Peter')");
-    db.insert("INSERT INTO people (id, name) VALUES (1, 'Markus')");
-
-    auto res = db.select("SELECT * FROM people");
-
-    for (const auto& row : res) {
-        for (const auto& i : row) {
-            std::cout << i << ' ';
-        }
-        std::cout << std::endl;
+    if (!authenticate_user()) {
+        std::cout << "Authorization was failed\n";
+        return 0;
     }
+
+    std::cout << "You was successfully authorize in system\n";
 
     return 0;
 }
