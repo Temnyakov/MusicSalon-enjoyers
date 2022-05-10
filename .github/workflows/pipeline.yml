@@ -13,6 +13,6 @@ jobs:
     - name: setup gnu
       run: sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && sudo apt install -y g++-11
     - name: make
-      run: sudo make
-    #- name: test
-    #  run: cd bin && make && ./test
+      run: sudo make -f Mk_test
+    - name: test
+      run: cd bin && ./tests
