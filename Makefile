@@ -8,28 +8,28 @@ CXXFLAGS = -std=c++20 -Ofast
 
 all: $(TARGET)
 
-$(TARGET): $(OBJDIR)/main.o $(OBJDIR)/authentication.o $(OBJDIR)/sqlite3_database.o $(OBJDIR)/sqlite3.o $(OBJDIR)/aes128.o $(OBJDIR)/MD5.o
+$(TARGET): $(OBJDIR)/main.o $(OBJDIR)/authentication.o $(OBJDIR)/sqlite3_database.o $(OBJDIR)/aes128.o $(OBJDIR)/MD5.o
 	mkdir $(BINDIR)
-	g++ -o $@ $^ -Ofast
+	g++-11 -o $@ $^ -Ofast -lsqlite3
 
 $(OBJDIR)/main.o: $(SRCDIR)/main.cpp
 	mkdir $(OBJDIR)
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++-11 -c -o $@ $< $(CXXFLAGS) -lsqlite3
 
-$(OBJDIR)/sqlite3.o: $(SRCDIR)/sqlite3.c
-	gcc -c -o $@ $< -Ofast
+#$(OBJDIR)/sqlite3.o: $(SRCDIR)/sqlite3.c
+#	gcc-11 -c -o $@ $< -Ofast
 
 $(OBJDIR)/sqlite3_database.o: $(SRCDIR)/sqlite3_database.cpp
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++-11 -c -o $@ $< $(CXXFLAGS) -lsqlite3
 
 $(OBJDIR)/authentication.o: $(SRCDIR)/authentication.cpp
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++-11 -c -o $@ $< $(CXXFLAGS) -lsqlite3
 
 $(OBJDIR)/MD5.o: $(SRCDIR)/MD5.cpp
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++-11 -c -o $@ $< $(CXXFLAGS) -lsqlite3
 
 $(OBJDIR)/aes128.o: $(SRCDIR)/aes128.cpp
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++-11 -c -o $@ $< $(CXXFLAGS) -lsqlite3
 
 clean:
 	rm -rf $(BINDIR) $(OBJDIR)
