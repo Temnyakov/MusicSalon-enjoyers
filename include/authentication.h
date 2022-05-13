@@ -22,9 +22,6 @@ const std::string users_db_path = "../users.db";
 const std::string users_db_create = "CREATE TABLE IF NOT EXISTS users (user_id integer PRIMARY KEY AUTOINCREMENT, user_email text, user_password text);";
 const std::string new_user_data_insert = "INSERT INTO users (user_email, user_password) VALUES (?, ?);";
 
-template <typename T, typename CheckFunction>
-void prompt(T& value, CheckFunction check, const std::string& msg, const std::string& error_msg = "");
-
 std::vector<std::vector<std::string>> find_user_by_email(const sqlite3_database& db, const std::string& email);
 bool m_log_in(const sqlite3_database& db);
 bool m_sign_up(const sqlite3_database& db);
