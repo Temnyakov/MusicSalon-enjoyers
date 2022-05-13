@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="MSd.css">
+    <title>Документация по базе данных "Музыкальный салон"</title>
+  </head>
+  <body>
+	<h1>База данных: Музыкальный салон</h1>
+  <p>Компакт диски по исполнителям </p>
+  <h2>Таблицы</h2>
+  <table border="4em">
+    <tr><td><button class="accordion">CD</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_company</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>id_performer</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>3</td><td>compact_code</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>4</td><td>compact_price</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>5</td><td>compact_date</td><td>date</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>companies</td><td>id_company</td><td>id_company</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>performers</td><td>id_performer</td><td>id_performer</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>
+        <button class="accordion">Триггер</button>
+        <div class="panel"><p>TRIGGER AFTER_insert_CD
+          AFTER INSERT
+          on CD	
+        BEGIN 
+        INSERT INTO storage(id_storageSlot id_cd CD_amount)
+            VALUES(NEW.id_cd NEW.id_cd 0);
+        </td>                                            
+    <tr ><td ><button class="accordion">CD_compositions</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>1</td><td>id_composition</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>compositions</td><td>id_composition</td><td>id_composition</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>CD</td><td>id_cd</td><td>id_cd</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div></tr>                                  
+    <tr><td><button class="accordion">authors</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_author</td><td>integer</td><td>1</td><td>unknown</td><td>1</td></tr><tr><td>1</td><td>author_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> 
+        </div>                                        
+    <tr><td><button class="accordion">companies</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_company</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>company_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> 
+        </div>                                      
+    <tr><td><button class="accordion">compositions</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_composition</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_author</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>composition_name</td><td>text</td><td>0</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>authors</td><td>id_author</td><td>id_author</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>                                   
+    <tr><td><button class="accordion">operations</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_operation</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>operation_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p>
+        </div>                                     
+    <tr><td><button class="accordion">performers</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_performer</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>performer_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p>
+        </div>                                     
+    <tr><td><button class="accordion">storage</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_storageSlot</td><td></td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>CD_amount</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>CD</td><td>id_cd</td><td>id_cd</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>  
+
+    <tr><td><button class="accordion">trades</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_trade</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_operation</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>copies_amount</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>3</td><td>trade_date</td><td>date</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>4</td><td>id_storageSlot</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>operations</td><td>id_operation</td><td>id_operation</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>storage</td><td>id_storageSlot</td><td>id_storageSlot</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>     
+        <button class="accordion">Триггер</button>
+        <div class="panel"><p>TRIGGER BEFORE_insert_trades
+          BEFORE INSERT
+          on trades	
+        BEGIN 
+        UPDATE storage
+            SET CD_amount=
+            CASE NEW.id_operation
+          when 1
+            then CD_amount-NEW.copies_amount
+          when 2 
+            then CD_amount+NEW.copies_amount
+            END
+            where id_storageSlot=NEW.id_storageSlot;
+      
+    </table>
+
+
+
+
+
+
+
+
+
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+      
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+      </script>
+  </body>
+</html>
+
+
+
+
+
