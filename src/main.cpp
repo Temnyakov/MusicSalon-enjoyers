@@ -1,4 +1,5 @@
 #include "../include/authentication.h"
+#include "../include/user_actions.h"
 
 int main() {
     if (!authenticate_user()) {
@@ -7,6 +8,8 @@ int main() {
     }
 
     std::cout << "You was successfully authorize in system\n";
+
+    run_user_interface();
 
     return 0;
 }

@@ -17,8 +17,8 @@ public:
     explicit sqlite3_database(const std::string& db_name);
 
     query_result select(const std::string& sql) const;
-    void param_insert(const std::string& sql, const std::vector<std::string>& values) const;
     void insert(const std::string& sql) const;
+    void param_insert(const std::string& sql, const std::vector<std::string>& values) const;
     void del(const std::string& sql) const;
 
     ~sqlite3_database();
