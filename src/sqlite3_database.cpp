@@ -28,6 +28,22 @@ void sqlite3_database::insert(const std::string& sql) const {
     }
 }
 
+void sqlite3_database::param_insert(const std::string& sql, const std::vector<std::string>& values) const {
+    sqlite3_stmt* stmt;
+
+    sqlite3_prepare_v2(m_db, sql.c_str(), sql.size(), &stmt, nullptr);
+
+    for (int i = 0; i < values.size(); ++i) {
+        sqlite3_bind_text(stmt, i + 1, values[i].c_str(), values[i].size(), nullptr);
+    }
+
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        throw std::runtime_error("Error: insertion was failed");
+    }
+
+    sqlite3_finalize(stmt) ;
+}
+
 void sqlite3_database::del(const std::string& sql) const {
     insert(sql);
 }
@@ -45,20 +61,4 @@ int sqlite3_database::m_default_callback(void* data, int argc, char** argv, char
 
 sqlite3_database::~sqlite3_database() {
     sqlite3_close(m_db);
-}
-
-void sqlite3_database::param_insert(const std::string& sql, const std::vector<std::string>& values) const {
-    sqlite3_stmt* stmt;
-
-    sqlite3_prepare_v2(m_db, sql.c_str(), sql.size(), &stmt, nullptr);
-
-    for (int i = 0; i < values.size(); ++i) {
-        sqlite3_bind_text(stmt, i + 1, values[i].c_str(), values[i].size(), nullptr);
-    }
-
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        throw std::runtime_error("Error: insertion was failed");
-    }
-
-    sqlite3_finalize(stmt) ;
 }

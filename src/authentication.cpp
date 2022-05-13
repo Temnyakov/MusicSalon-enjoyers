@@ -1,16 +1,5 @@
 #include "../include/authentication.h"
-
-template <typename T, typename CheckFunction>
-void prompt(T& value, CheckFunction check, const std::string& msg, const std::string& error_msg) {
-    std::cout << msg;
-    while (true) {
-        std::cin >> value;
-        if (check(value)) {
-            break;
-        }
-        std::cout << error_msg;
-    }
-}
+#include "../include/prompt.h"
 
 std::vector<std::vector<std::string>> find_user_by_email(const sqlite3_database& db, const std::string& email) {
     const std::string find_by_email = "SELECT user_id, user_email, user_password FROM users WHERE user_email == \"" + email + "\";";
