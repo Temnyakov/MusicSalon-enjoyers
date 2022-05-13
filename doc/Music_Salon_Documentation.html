@@ -90,7 +90,7 @@
 
     <h2>Таблицы sql</h2>
     <button class="accordion" id="identified">Показать</button>
-    <div class="panel"><p><table border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>table</td><td>CD</td><td>CD</td><td>2</td><td>CREATE TABLE &quot;CD&quot; (
+    <div class="panel"><p><table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>table</td><td>CD</td><td>CD</td><td>2</td><td>CREATE TABLE &quot;CD&quot; (
       &quot;id_cd&quot;	integer NOT NULL,
       &quot;id_company&quot;	integer NOT NULL,
       &quot;id_performer&quot;	integer NOT NULL,
@@ -150,11 +150,11 @@
     <h2>Индексы sql</h2>
     <button class="accordion" id="identified">Показать</button>
     <div class="panel"><p>
-    <table border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>index</td><td>sqlite_autoindex_CD_1</td><td>CD</td><td>3</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_1</td><td>storage</td><td>10</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_2</td><td>storage</td><td>11</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_CD_compositions_1</td><td>CD_compositions</td><td>15</td><td>NULL</td></tr></table> </p></div>
+    <table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>index</td><td>sqlite_autoindex_CD_1</td><td>CD</td><td>3</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_1</td><td>storage</td><td>10</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_2</td><td>storage</td><td>11</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_CD_compositions_1</td><td>CD_compositions</td><td>15</td><td>NULL</td></tr></table> </p></div>
     <h2>Триггеры sql</h2>
     <button class="accordion" id="identified">Показать</button>
     <div class="panel"><p>
-    <table border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>trigger</td><td>BEFORE_insert_trades</td><td>trades</td><td>0</td><td>CREATE TRIGGER BEFORE_insert_trades
+    <table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>trigger</td><td>BEFORE_insert_trades</td><td>trades</td><td>0</td><td>CREATE TRIGGER BEFORE_insert_trades
       BEFORE INSERT
       on trades	
     BEGIN 
