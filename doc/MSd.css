@@ -6,6 +6,7 @@ h1 {
   background: linear-gradient(#4330b4,#9198E5);
   padding: 0.5em;
   color: white;
+  width: auto;
   border-radius: 0em;
   text-align: left;
   
@@ -13,7 +14,7 @@ h1 {
 p {
   margin: 0;
   text-indent: 3ch;
- 
+  
   font-size: 1.0em;
   color: black;
 }
@@ -23,22 +24,38 @@ p {
   color: #444;
   cursor: pointer;
   width: 100%;
-  text-align: left;
+  height: 100%;
+  text-align: top,left;
   border: none;
   outline: none;
   transition: 0.4s;
 }
-
+td{
+  vertical-align: top;
+}
 
 .active, .accordion:hover {
   background-color: #ccc;
 }
 
+#identified {
+  margin-left: 0;
+  width: auto;
+}
 
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
 .panel {
   padding: 0 18px;
   background-color: rgb(188, 185, 185);
   display: none;
   overflow: hidden;
 }
+
+
+
+
+
 
