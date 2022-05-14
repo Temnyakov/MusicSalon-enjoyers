@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="MSd.css">
+    <title>Документация по базе данных "Музыкальный салон"</title>
+  </head>
+  <body>
+    
+	<h1>База данных: Музыкальный салон</h1>
+  <p>Компакт диски по исполнителям </p>
+  <h2>Таблицы</h2>
+  
+  <table id="identified" border="4em" >
+    <tr><td><button class="accordion">CD</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_company</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>id_performer</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>3</td><td>compact_code</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>4</td><td>compact_price</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>5</td><td>compact_date</td><td>date</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>companies</td><td>id_company</td><td>id_company</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>performers</td><td>id_performer</td><td>id_performer</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>
+        <button class="accordion">Триггер</button>
+        <div class="panel"><p>TRIGGER AFTER_insert_CD
+          AFTER INSERT
+          on CD	
+        BEGIN 
+        INSERT INTO storage(id_storageSlot id_cd CD_amount)
+            VALUES(NEW.id_cd NEW.id_cd 0);
+        </td>                                            
+    <tr><td ><button class="accordion">CD_compositions</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>1</td><td>id_composition</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>compositions</td><td>id_composition</td><td>id_composition</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>CD</td><td>id_cd</td><td>id_cd</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div></td>                                  
+    <tr><td><button class="accordion">authors</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_author</td><td>integer</td><td>1</td><td>unknown</td><td>1</td></tr><tr><td>1</td><td>author_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+         
+        </div>                                        
+    <tr><td><button class="accordion">companies</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_company</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>company_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+         
+        </div>                                      
+    <tr><td><button class="accordion">compositions</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_composition</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_author</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>composition_name</td><td>text</td><td>0</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>authors</td><td>id_author</td><td>id_author</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>                                   
+    <tr><td><button class="accordion">operations</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_operation</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>operation_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          
+        </div>                                     
+    <tr><td><button class="accordion">performers</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_performer</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>performer_name</td><td>text</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          
+        </div>                                     
+    <tr><td><button class="accordion">storage</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_storageSlot</td><td></td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_cd</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>CD_amount</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>CD</td><td>id_cd</td><td>id_cd</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>  
+
+    <tr><td><button class="accordion">trades</button>
+        <div class="panel">
+          <p><table border="5em"><tr><th>cid</th><th>name</th><th>type</th><th>notnull</th><th>dflt_value</th><th>pk</th><tr><tr><td>0</td><td>id_trade</td><td>integer</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_operation</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>copies_amount</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>3</td><td>trade_date</td><td>date</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>4</td><td>id_storageSlot</td><td>integer</td><td>1</td><td>NULL</td><td>0</td></tr></table></p>
+          <button class="accordion">Альтернативные ключи </button>
+        <div class="panel"><p> <table border="5em"><tr><th>id</th><th>seq</th><th>table</th><th>from</th><th>to</th><th>on_update</th><th>on_delete</th><th>match</th><tr><tr><td>0</td><td>0</td><td>operations</td><td>id_operation</td><td>id_operation</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr><tr><td>1</td><td>0</td><td>storage</td><td>id_storageSlot</td><td>id_storageSlot</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></table>
+        </div>     
+        <button class="accordion">Триггер</button>
+        <div class="panel"><p>TRIGGER BEFORE_insert_trades
+          BEFORE INSERT
+          on trades	
+        BEGIN 
+        UPDATE storage
+            SET CD_amount=
+            CASE NEW.id_operation
+          when 1
+            then CD_amount-NEW.copies_amount
+          when 2 
+            then CD_amount+NEW.copies_amount
+            END
+            where id_storageSlot=NEW.id_storageSlot;
+      
+    </table>
+
+    <h2>Таблицы sql</h2>
+    <button class="accordion" id="identified">Показать</button>
+    <div class="panel"><p><table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>table</td><td>CD</td><td>CD</td><td>2</td><td>CREATE TABLE &quot;CD&quot; (
+      &quot;id_cd&quot;	integer NOT NULL,
+      &quot;id_company&quot;	integer NOT NULL,
+      &quot;id_performer&quot;	integer NOT NULL,
+      &quot;compact_code&quot;	text NOT NULL,
+      &quot;compact_price&quot;	integer NOT NULL,
+      &quot;compact_date&quot;	date NOT NULL,
+      CONSTRAINT &quot;compact_code&quot; UNIQUE(&quot;compact_code&quot;),
+      CONSTRAINT &quot;CD_performers&quot; FOREIGN KEY(&quot;id_performer&quot;) REFERENCES &quot;performers&quot;(&quot;id_performer&quot;),
+      CONSTRAINT &quot;CD_companies&quot; FOREIGN KEY(&quot;id_company&quot;) REFERENCES &quot;companies&quot;(&quot;id_company&quot;),
+      CONSTRAINT &quot;id_cd&quot; PRIMARY KEY(&quot;id_cd&quot;)
+    )</td></tr><tr><td>table</td><td>authors</td><td>authors</td><td>4</td><td>CREATE TABLE &quot;authors&quot; (
+      &quot;id_author&quot;	integer NOT NULL DEFAULT unknown,
+      &quot;author_name&quot;	text NOT NULL,
+      CONSTRAINT &quot;id_author&quot; PRIMARY KEY(&quot;id_author&quot; AUTOINCREMENT)
+    )</td></tr><tr><td>table</td><td>sqlite_sequence</td><td>sqlite_sequence</td><td>5</td><td>CREATE TABLE sqlite_sequence(name,seq)</td></tr><tr><td>table</td><td>companies</td><td>companies</td><td>6</td><td>CREATE TABLE &quot;companies&quot; (
+      &quot;id_company&quot;	integer NOT NULL,
+      &quot;company_name&quot;	text NOT NULL,
+      CONSTRAINT &quot;id_company&quot; PRIMARY KEY(&quot;id_company&quot;)
+    )</td></tr><tr><td>table</td><td>operations</td><td>operations</td><td>7</td><td>CREATE TABLE &quot;operations&quot; (
+      &quot;id_operation&quot;	integer NOT NULL,
+      &quot;operation_name&quot;	text NOT NULL CHECK(NOT null),
+      CONSTRAINT &quot;id_operation&quot; PRIMARY KEY(&quot;id_operation&quot;)
+    )</td></tr><tr><td>table</td><td>performers</td><td>performers</td><td>8</td><td>CREATE TABLE &quot;performers&quot; (
+      &quot;id_performer&quot;	integer NOT NULL,
+      &quot;performer_name&quot;	text NOT NULL,
+      CONSTRAINT &quot;id_performer&quot; PRIMARY KEY(&quot;id_performer&quot;)
+    )</td></tr><tr><td>table</td><td>storage</td><td>storage</td><td>9</td><td>CREATE TABLE &quot;storage&quot; (
+      &quot;id_storageSlot&quot;	 NOT NULL,
+      &quot;id_cd&quot;	integer NOT NULL,
+      &quot;CD_amount&quot;	integer NOT NULL CHECK(&quot;CD_amount&quot; &gt;= 0),
+      CONSTRAINT &quot;id_cd&quot; UNIQUE(&quot;id_cd&quot;),
+      CONSTRAINT &quot;Storage_CD&quot; FOREIGN KEY(&quot;id_cd&quot;) REFERENCES &quot;CD&quot;(&quot;id_cd&quot;),
+      CONSTRAINT &quot;storage_pk&quot; PRIMARY KEY(&quot;id_storageSlot&quot;)
+    )</td></tr><tr><td>table</td><td>trades</td><td>trades</td><td>12</td><td>CREATE TABLE &quot;trades&quot; (
+      &quot;id_trade&quot;	integer NOT NULL,
+      &quot;id_operation&quot;	integer NOT NULL,
+      &quot;copies_amount&quot;	integer NOT NULL CHECK(&quot;copies_amount&quot; &gt; 0),
+      &quot;trade_date&quot;	date NOT NULL,
+      &quot;id_storageSlot&quot;	integer NOT NULL,
+      CONSTRAINT &quot;trades_Storage&quot; FOREIGN KEY(&quot;id_storageSlot&quot;) REFERENCES &quot;storage&quot;(&quot;id_storageSlot&quot;),
+      CONSTRAINT &quot;trades_operations&quot; FOREIGN KEY(&quot;id_operation&quot;) REFERENCES &quot;operations&quot;(&quot;id_operation&quot;),
+      CONSTRAINT &quot;id_trade&quot; PRIMARY KEY(&quot;id_trade&quot;)
+    )</td></tr><tr><td>table</td><td>compositions</td><td>compositions</td><td>13</td><td>CREATE TABLE &quot;compositions&quot; (
+      &quot;id_composition&quot;	integer NOT NULL,
+      &quot;id_author&quot;	integer NOT NULL,
+      &quot;composition_name&quot;	text,
+      CONSTRAINT &quot;copmositions_authors&quot; FOREIGN KEY(&quot;id_author&quot;) REFERENCES &quot;authors&quot;(&quot;id_author&quot;),
+      CONSTRAINT &quot;id_composition&quot; PRIMARY KEY(&quot;id_composition&quot;)
+    )</td></tr><tr><td>table</td><td>CD_compositions</td><td>CD_compositions</td><td>14</td><td>CREATE TABLE &quot;CD_compositions&quot; (
+      &quot;id_cd&quot;	integer NOT NULL,
+      &quot;id_composition&quot;	integer NOT NULL,
+      UNIQUE(&quot;id_cd&quot;,&quot;id_composition&quot;),
+      CONSTRAINT &quot;CD_compositions_CD&quot; FOREIGN KEY(&quot;id_cd&quot;) REFERENCES &quot;CD&quot;(&quot;id_cd&quot;),
+      CONSTRAINT &quot;CD_compositions_copmositions&quot; FOREIGN KEY(&quot;id_composition&quot;) REFERENCES &quot;compositions&quot;(&quot;id_composition&quot;)
+    )</td></tr></table>
+    </p></div>
+    <h2>Индексы sql</h2>
+    <button class="accordion" id="identified">Показать</button>
+    <div class="panel"><p>
+    <table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>index</td><td>sqlite_autoindex_CD_1</td><td>CD</td><td>3</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_1</td><td>storage</td><td>10</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_storage_2</td><td>storage</td><td>11</td><td>NULL</td></tr><tr><td>index</td><td>sqlite_autoindex_CD_compositions_1</td><td>CD_compositions</td><td>15</td><td>NULL</td></tr></table> </p></div>
+    <h2>Триггеры sql</h2>
+    <button class="accordion" id="identified">Показать</button>
+    <div class="panel"><p>
+    <table id="identified" border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>trigger</td><td>BEFORE_insert_trades</td><td>trades</td><td>0</td><td>CREATE TRIGGER BEFORE_insert_trades
+      BEFORE INSERT
+      on trades	
+    BEGIN 
+    UPDATE storage
+        SET CD_amount=
+        CASE NEW.id_operation
+      when 1
+        then CD_amount-NEW.copies_amount
+      when 2 
+        then CD_amount+NEW.copies_amount
+        END
+        where id_storageSlot=NEW.id_storageSlot;
+    END</td></tr><tr><td>trigger</td><td>AFTER_insert_CD</td><td>CD</td><td>0</td><td>CREATE TRIGGER AFTER_insert_CD
+      AFTER INSERT
+      on CD	
+    BEGIN 
+    INSERT INTO storage(id_storageSlot,id_cd,CD_amount)
+        VALUES(NEW.id_cd,NEW.id_cd,0);
+    END</td></tr></table> </p></div>
+    <h2>Представления sql</h2>
+    <button class="accordion" id="identified">Показать</button>
+    <div class="panel"><p>
+    <table border="5em"><tr><th>type</th><th>name</th><th>tbl_name</th><th>rootpage</th><th>sql</th><tr><tr><td>view</td><td>_query_solds_and_remainder</td><td>_query_solds_and_remainder</td><td>0</td><td>CREATE VIEW _query_solds_and_remainder AS
+      SELECT DISTINCT CD.compact_code, sum(copies_amount)as sold_amount, CD_amount
+      FROM trades
+      INNER JOIN storage ON storage.id_storageSlot=trades.id_storageSlot
+      INNER JOIN CD ON CD.id_cd=storage.id_cd
+      WHERE id_operation = 1
+      GROUP by trades.id_storageSlot
+      ORDER BY (sold_amount - CD_amount) DESC</td></tr><tr><td>view</td><td>_query_sale_and_admission_v2</td><td>_query_sale_and_admission_v2</td><td>0</td><td>CREATE VIEW _query_sale_and_admission_v2 AS 
+      SELECT id_cd,
+      coalesce(sum(sale_count),0) as sale_count,
+      coalesce(sum(admission_count),0) as admission_count from
+      (SELECT  
+      id_storageSlot as id_cd,
+      CASE 
+        WHEN id_operation=1
+        then sum(copies_amount)
+        END sale_count,
+      CASE 
+        WHEN id_operation=2
+        then sum(copies_amount)
+        END admission_count
+      FROM trades 
+      WHERE trade_date BETWEEN &#039;01-01-2000&#039; and &#039;30-12-2022&#039; 
+      GROup by id_storageSlot,id_operation)
+      GROUP by id_cd</td></tr><tr><td>view</td><td>_query_sale_and_admission</td><td>_query_sale_and_admission</td><td>0</td><td>CREATE VIEW _query_sale_and_admission AS 
+      SELECT  
+      id_storageSlot as id_cd,
+      coalesce(admission,0) as admission_count,
+      coalesce(sale,0) as sale_count
+      FROM trades 
+       INNER JOIN 
+       (SELECT 
+       sum(copies_amount) as admission,id_storageSlot 
+       from trades 
+       WHERE id_operation=2 
+       GROUP BY id_storageSlot) Using(id_storageSlot)
+       INNER JOIN 
+       (SELECT 
+       sum(copies_amount) as sale,id_storageSlot 
+       from trades 
+       WHERE id_operation=1 
+       GROUP BY id_storageSlot) Using(id_storageSlot)
+       WHERE trade_date BETWEEN &#039;01-01-2000&#039; and &#039;30-12-2022&#039; 
+       GROup by id_storageSlot</td></tr><tr><td>view</td><td>_query_out_sum_by_authors</td><td>_query_out_sum_by_authors</td><td>0</td><td>CREATE VIEW _query_out_sum_by_authors AS 
+      SELECT 
+        authors.id_author, 
+        author_name,
+        sum(copies_sold) as copies_sold,
+        sum(out_compact_sum) as out_compact_sum
+        FROM 
+        authors 
+      INNER JOIN compositions ON authors.id_author=compositions.id_author
+      INNER JOIN CD_compositions ON CD_compositions.id_composition=compositions.id_composition
+      INNER JOIN (
+      SELECT CD.id_cd,
+        sum(copies_amount) as copies_sold,
+        (sum(copies_amount)*replace(compact_price,&#039; &#039;,&#039;&#039;)) as out_compact_sum
+        FROM trades
+        INNER JOIN storage ON trades.id_storageSlot=storage.id_storageSlot
+        INNER JOIN CD ON storage.id_cd=CD.id_cd
+        WHERE id_operation=1
+        GROUP BY storage.id_storageSlot)
+        as tbl_1 ON tbl_1.id_cd=CD_compositions.id_cd 
+      GROUP by authors.id_author
+        ORDER by authors.id_author</td></tr><tr><td>view</td><td>_query_max_sold_for_the_period</td><td>_query_max_sold_for_the_period</td><td>0</td><td>CREATE VIEW _query_max_sold_for_the_period AS 
+      SELECT  
+      compact_code,
+      sum(copies_amount) as copies_sold ,
+       sum(copies_amount)*replace(compact_price,&#039; &#039;,&#039;&#039;) as priceOfCDs
+      FROM trades 
+      INNER JOIN storage ON trades.id_storageSlot=storage.id_storageSlot
+      INNER JOIN CD on CD.id_cd=storage.id_cd
+       WHERE id_operation=1 
+       AND trade_date BETWEEN &#039;01-01-2000&#039; and &#039;30-12-2030&#039; &#x2F;*dd-mm-yyyy *&#x2F;
+       AND trades.id_storageSlot=(SELECT id_cd from CD where compact_code=&#039;29830591-7&#039;)</td></tr><tr><td>view</td><td>_query_max_CDs_sold_with_most_popular_performer</td><td>_query_max_CDs_sold_with_most_popular_performer</td><td>0</td><td>CREATE VIEW _query_max_CDs_sold_with_most_popular_performer AS 
+      SELECT 
+        sum(copies_amount) as disks_sold,performer_name
+      From 
+        CD
+      INNER JOIN trades On CD.id_cd = trades.id_storageSlot
+      INNER JOIN performers USING(id_performer)
+      WHERE 
+      id_operation=1 
+      AND id_performer=
+            (SELECT	
+              id_performer
+            FROM
+              CD
+            GROUP by 
+              id_performer
+            ORDER By 
+              count(id_performer) DESC
+            LIMIT 1)</td></tr><tr><td>view</td><td>_query_cd_with_max_solds</td><td>_query_cd_with_max_solds</td><td>0</td><td>CREATE VIEW _query_cd_with_max_solds AS 
+      
+      SELECT tbl_1.*,
+      GROUP_CONCAT(&quot;Composition: &quot;
+      ||coalesce(tbl_2.composition_name,&#039;Unknown&#039;)
+      ||char(10)
+      ||&quot;Author: &quot;
+      ||coalesce(tbl_2.author_name,&#039;Unknown&#039;),char(10)) as compositions_info
+      
+      FROM (SELECT  storage.id_cd,
+      (
+      SELECT max(copies) from (Select sum(copies_amount)as copies,id_cd 
+      FROM trades
+      INNER JOIN storage  ON storage.id_storageSlot=trades.id_storageSlot
+      WHERE id_operation=1 
+       GROUP BY storage.id_storageSlot)) 
+       as max_copies_sold,
+       group_concat(id_trade) as id_trades,
+      compact_code,
+      compact_date,
+      compact_price,
+      company_name,
+      performer_name
+      
+      FROM trades
+      
+      INNER JOIN storage  ON storage.id_storageSlot=trades.id_storageSlot
+      INNER JOIN CD ON CD.id_cd=storage.id_cd
+      INNER JOIN companies ON CD.id_company=companies.id_company
+      INNER JOIN performers ON CD.id_performer=performers.id_performer
+      
+      WHERE id_operation=1 
+      
+      GROUP BY storage.id_storageSlot
+      HAVING sum(copies_amount) = max_copies_sold
+                
+      ORDER by storage.id_cd) 
+      as tbl_1
+      
+       LEFT JOIN (SELECT id_cd,composition_name,author_name 
+      from compositions 
+      INNER JOIN CD_compositions USING(id_composition)
+      INNER JOIN authors USING(id_author)
+      )as tbl_2 ON tbl_2.id_cd=tbl_1.id_cd
+      
+      GROUp by tbl_1.id_cd</td></tr></table> </p></div>
+
+
+
+
+
+
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+      
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+      </script>
+  </body>
+</html>
+
+
+
+
+
